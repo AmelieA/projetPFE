@@ -21,8 +21,25 @@ projetPFE = angular.module('projetPFE', []).controller 'particleController', [
   '$http'
   ($scope, $http) ->
     $http.get('/particles').success (data) ->
-      console.log data
       $scope.particles = data
+      console.log $scope.particles
+      return
+    return
+]
+
+angular.module('projetPFE').controller 'HeaderController', [
+  '$scope'
+  ($scope) ->
+    $scope.isCollapsed = false
+    $scope.menu = {}
+
+    $scope.toggleCollapsibleMenu = ->
+      $scope.isCollapsed = !$scope.isCollapsed
+      return
+
+    # Collapsing the menu after navigation
+    $scope.$on '$stateChangeSuccess', ->
+      $scope.isCollapsed = false
       return
     return
 ]

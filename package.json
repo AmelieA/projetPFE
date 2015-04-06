@@ -6,7 +6,7 @@
   "author": "AmelieA",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/AmelieA/projetPFE"
   },
   "engines": {
     "node": ">=0.10.28",
