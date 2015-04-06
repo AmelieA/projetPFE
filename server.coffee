@@ -7,17 +7,16 @@ swig  = require('swig');
 app = express()
 
 
-###*
 # Settings.
-###
 
 #all *.server.view.html will be render using swig
-app.engine('server.view.html', swig.renderFile);
-app.set('view engine', 'server.view.html');
+app.engine('view.html', swig.renderFile);
+app.set('view engine', 'view.html');
 #all views are on the ./app/views folder
-app.set('views', './app/views');
-
-app.use('/scripts', express.static(__dirname + '/node_modules/'));
+app.set('views', './public/views');
+#Static routes
+app.use('/lib', express.static(__dirname + '/node_modules'));
+app.use("/public", express.static(__dirname + '/public'));
 
 
 #hardCoded
@@ -105,6 +104,8 @@ app.get '/', (req, res) ->
   res.render 'index',
     title:'projetPFE'
   return
+
+
 
 server = app.listen(8080, ->
   host = server.address().address

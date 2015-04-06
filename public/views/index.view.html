@@ -1,0 +1,15 @@
+{% extends 'layout.view.html' %}
+
+{% block content %}
+<section ng-controller="particleController">
+	<div>
+		{{particles}}
+		<ul ng-repeat="particle in particles">
+			<li>{{particle.type}}</li>
+		</ul>
+		<ul ng-if="particles.length == 0">
+			<p>There seems to be no particles</p>
+		</ul>
+	</div>
+</section>
+{% endblock %}
