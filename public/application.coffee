@@ -22,7 +22,7 @@ projetPFE = angular.module('projetPFE', []).controller 'particleController', [
   ($scope, $http) ->
     $http.get('/particles').success (data) ->
       $scope.particles = data
-      console.log $scope.particles
+      console.log $scope
       return
     return
 ]

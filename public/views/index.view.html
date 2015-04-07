@@ -3,13 +3,15 @@
 {% block content %}
 <section ng-controller="particleController">
 	<div>
-		<p>{{particles.lenght}} particles </p>
-		<ul ng-repeat="particle in particles">
-			<li>{{particle.type}}</li>
-		</ul>
-		<ul ng-if="particles.length == 0">
-			<p>There seems to be no particles</p>
-		</ul>
+		<p>{{particles.toString}} particles </p>
+		<table>
+			<tr>
+				<th ng-repeat="(key, val) in particles[0]">{{key}}</th>
+			</tr>
+			<tr ng-repeat="particle in particles">
+				<td ng-repeat="(key, val) in particle">{{val}}</td>
+			</tr>
+		</table>
 	</div>
 </section>
 {% endblock %}

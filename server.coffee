@@ -23,66 +23,66 @@ app.use("/public", express.static(__dirname + '/public'));
 particles = [
   {
     'type': 'particles'
-    'Ximpulsion': 10
-    'Yimpulsion': 10
-    'Zimpulsion': 10
-    'Energie': 1
-    'ProductionVertex': 5
-    'DesintegrationVertex': 5
+    'Ximpulsion': '10'
+    'Yimpulsion': '10'
+    'Zimpulsion': '10'
+    'Energie': '1'
+    'ProductionVertex': '5'
+    'DesintegrationVertex': '5'
   }
   {
     'type': 'particles'
-    'Ximpulsion': -10
-    'Yimpulsion': -10
-    'Zimpulsion': -10
-    'Energie': -1
-    'ProductionVertex': 5
-    'DesintegrationVertex': 5
+    'Ximpulsion': '-10'
+    'Yimpulsion': '-10'
+    'Zimpulsion': '-10'
+    'Energie': '-1'
+    'ProductionVertex': '5'
+    'DesintegrationVertex': '5'
   }
   {
     'type': 'particles'
-    'Ximpulsion': 20
-    'Yimpulsion': 10
-    'Zimpulsion': 10
-    'Energie': 1
-    'ProductionVertex': 5
-    'DesintegrationVertex': 5
+    'Ximpulsion': '20'
+    'Yimpulsion': '10'
+    'Zimpulsion': '10'
+    'Energie': '1'
+    'ProductionVertex': '5'
+    'DesintegrationVertex': '5'
   }
   {
     'type': 'particles'
-    'Ximpulsion': 30
-    'Yimpulsion': 10
-    'Zimpulsion': 10
-    'Energie': 1
-    'ProductionVertex': 5
-    'DesintegrationVertex': 5
+    'Ximpulsion': '30'
+    'Yimpulsion': '10'
+    'Zimpulsion': '10'
+    'Energie': '1'
+    'ProductionVertex': '5'
+    'DesintegrationVertex': '5'
   }
   {
     'type': 'particles'
-    'Ximpulsion': 40
-    'Yimpulsion': 10
-    'Zimpulsion': 10
-    'Energie': 1
-    'ProductionVertex': 5
-    'DesintegrationVertex': 5
+    'Ximpulsion': '40'
+    'Yimpulsion': '10'
+    'Zimpulsion': '10'
+    'Energie': '1'
+    'ProductionVertex': '5'
+    'DesintegrationVertex': '5'
   }
   {
     'type': 'particles'
-    'Ximpulsion': 40
-    'Yimpulsion': 10
-    'Zimpulsion': 10
-    'Energie': 1
-    'ProductionVertex': 5
-    'DesintegrationVertex': 5
+    'Ximpulsion': '50'
+    'Yimpulsion': '10'
+    'Zimpulsion': '10'
+    'Energie': '1'
+    'ProductionVertex': '5'
+    'DesintegrationVertex': '5'
   }
   {
     'type': 'particles'
-    'Ximpulsion': 50
-    'Yimpulsion': 10
-    'Zimpulsion': 10
-    'Energie': 1
-    'ProductionVertex': 5
-    'DesintegrationVertex': 5
+    'Ximpulsion': '60'
+    'Yimpulsion': '10'
+    'Zimpulsion': '10'
+    'Energie': '1'
+    'ProductionVertex': '5'
+    'DesintegrationVertex': '5'
   }
 ]
 
