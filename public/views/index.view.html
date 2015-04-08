@@ -2,30 +2,45 @@
 
 {% block content %}
 <section ng-controller="particleController">
-	<div class="container theme-showcase">
 
-		<div class="action row" role="group">
-			<div class="col-lg-4">
-				<div class="input-group">
+	<div class="jumbotron">
+		<div class="container" style="padding-top:20px">
+			<div class="action row" role="group">
+				<div class="col-lg-4">
+					<div class="input-group">
 				  <span class="input-group-btn">
 					<button type="button" class="btn btn-default" ng-click="init()">Go!</button>
 				  </span>
-					<input type="text" class="form-control" placeholder="Go to particle n°" ng-model="localIndex">
-				</div><!-- /input-group -->
-			</div><!-- /.col-lg-6 -->
-			<button type="button" class="btn btn btn-default" ng-click="getNext()">
-				<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" ></span> Next
-			</button>
-		</div>
+						<input type="text" class="form-control" placeholder="Go to particle n°" ng-model="localIndex">
+					</div><!-- /input-group -->
+				</div><!-- /.col-lg-6 -->
+				<button type="button" class="btn btn btn-default" ng-click="getNext()">
+					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" ></span> Next
+				</button>
+			</div>
 
-		<div class="jumbotron">
+
 			<li ng-repeat="particle in particles">
 				<span>{{particle}}</span>
 			</li>
 		</div>
-
-		<canvas id="canvas" style="border: 1px gray solid; float: left"></canvas>
-
 	</div>
+
+	<div class="container">
+		<div class="col-md-4">
+			<h2>Impulsions on Px,Py</h2>
+			<canvas id="canvasXY" style="border: 1px gray solid; float: left"></canvas>
+		</div>
+		<div class="col-md-4">
+			<h2>Impulsions on Py,Pz</h2>
+			<canvas id="canvasYZ" style="border: 1px gray solid; float: left"></canvas>
+		</div>
+		<div class="col-md-4">
+			<h2>Impulsions on Pz,Px</h2>
+			<canvas id="canvasZX" style="border: 1px gray solid; float: left"></canvas>
+		</div>
+	</div>
+
+
 </section>
 {% endblock %}

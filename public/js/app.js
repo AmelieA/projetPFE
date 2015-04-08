@@ -2,61 +2,72 @@ var projetPFE;
 
 projetPFE = angular.module('projetPFE', []).controller('particleController', [
   '$scope', '$http', function($scope, $http) {
-    var canvas, context, dataMagnification, drawCurrentIndex, drawGrid, drawLine, get, gridSpacing, index;
-    canvas = void 0;
+    var canvasSize, canvasXY, canvasYZ, canvasZX, context, contextXY, contextYZ, contextZX, dataMagnification, drawCurrentIndex, drawGrid, drawLine, get, gridSpacing, index;
+    canvasXY = void 0;
     context = void 0;
     get = void 0;
     index = void 0;
-    canvas = document.getElementById('canvas');
-    context = canvas.getContext('2d');
-    canvas.width = 300;
-    canvas.height = 300;
-    context.globalAlpha = 1.0;
-    context.beginPath();
-    gridSpacing = 50;
-    dataMagnification = 2;
-    drawLine = function(xStrart, yStart, xEnd, yEnd) {
+    canvasXY = document.getElementById('canvasXY');
+    canvasYZ = document.getElementById('canvasYZ');
+    canvasZX = document.getElementById('canvasZX');
+    contextXY = canvasXY.getContext('2d');
+    contextYZ = canvasYZ.getContext('2d');
+    contextZX = canvasZX.getContext('2d');
+    canvasSize = 300;
+    dataMagnification = 1.5;
+    gridSpacing = 10 * dataMagnification;
+    drawLine = function(context, xStrart, yStart, xEnd, yEnd) {
       context.beginPath();
       context.moveTo(xStrart, yStart);
       context.lineTo(xEnd, yEnd);
-      context.strokeStyle = 'black';
       context.stroke();
     };
-    drawGrid = function() {
+    drawGrid = function(canvas, context) {
       var i;
+      canvas.width = canvasSize;
+      canvas.height = canvasSize;
+      context.beginPath();
       context.strokeStyle = 'gray';
       i = 0;
-      while (i <= canvas.height) {
+      while (i <= canvasSize) {
         context.beginPath();
         context.moveTo(0, i);
-        context.lineTo(canvas.width, i);
+        context.lineTo(canvasSize, i);
         context.stroke();
         i += gridSpacing;
       }
       i = 0;
-      while (i <= canvas.width) {
+      while (i <= canvasSize) {
         context.beginPath();
         context.moveTo(i, 0);
-        context.lineTo(i, canvas.height);
+        context.lineTo(i, canvasSize);
         context.stroke();
         i += gridSpacing;
       }
+      context.strokeStyle = 'red';
+      context.fillRect(canvasSize / 2 - 2, canvasSize / 2 - 2, 4, 4);
+      context.strokeStyle = 'black';
     };
     drawCurrentIndex = function() {
       if ($scope.particles.length === 1) {
-        $scope.particles[index].XimpulsionSartDrawing = canvas.width / 2;
-        $scope.particles[index].YimpulsionSartDrawing = canvas.height / 2;
-        drawGrid();
-        drawLine(canvas.width / 2, canvas.height / 2, canvas.width / 2 + $scope.particles[index].Ximpulsion * 2, canvas.height / 2 + $scope.particles[index].Yimpulsion * 2);
+        $scope.particles[index].XimpulsionSartDrawing = canvasSize / 2;
+        $scope.particles[index].YimpulsionSartDrawing = canvasSize / 2;
+        $scope.particles[index].ZimpulsionSartDrawing = canvasSize / 2;
+        drawGrid(canvasXY, contextXY);
+        drawGrid(canvasYZ, contextYZ);
+        drawGrid(canvasZX, contextZX);
       } else {
         $scope.particles.forEach(function(particle) {
           if ($scope.particles[index].IDProductionVertex === particle.IDDesintegrationVertex) {
             $scope.particles[index].XimpulsionSartDrawing = particle.Ximpulsion * dataMagnification + particle.XimpulsionSartDrawing;
             $scope.particles[index].YimpulsionSartDrawing = particle.Yimpulsion * dataMagnification + particle.YimpulsionSartDrawing;
-            drawLine($scope.particles[index].XimpulsionSartDrawing, $scope.particles[index].YimpulsionSartDrawing, $scope.particles[index].XimpulsionSartDrawing + $scope.particles[index].Ximpulsion * dataMagnification, $scope.particles[index].YimpulsionSartDrawing + $scope.particles[index].Yimpulsion * dataMagnification);
+            $scope.particles[index].ZimpulsionSartDrawing = particle.Zimpulsion * dataMagnification + particle.ZimpulsionSartDrawing;
           }
         });
       }
+      drawLine(contextXY, $scope.particles[index].XimpulsionSartDrawing, $scope.particles[index].YimpulsionSartDrawing, $scope.particles[index].XimpulsionSartDrawing + $scope.particles[index].Ximpulsion * dataMagnification, $scope.particles[index].YimpulsionSartDrawing + $scope.particles[index].Yimpulsion * dataMagnification);
+      drawLine(contextYZ, $scope.particles[index].YimpulsionSartDrawing, $scope.particles[index].ZimpulsionSartDrawing, $scope.particles[index].YimpulsionSartDrawing + $scope.particles[index].Yimpulsion * dataMagnification, $scope.particles[index].ZimpulsionSartDrawing + $scope.particles[index].Zimpulsion * dataMagnification);
+      return drawLine(contextZX, $scope.particles[index].ZimpulsionSartDrawing, $scope.particles[index].XimpulsionSartDrawing, $scope.particles[index].ZimpulsionSartDrawing + $scope.particles[index].Zimpulsion * dataMagnification, $scope.particles[index].XimpulsionSartDrawing + $scope.particles[index].Ximpulsion * dataMagnification);
     };
     $scope.particles = [];
     get = function(index) {

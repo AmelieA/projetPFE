@@ -25,7 +25,7 @@ app.use("/public", express.static(__dirname + '/public'));
 particles = [
   {
     'type': 'particles'
-    'Ximpulsion': 10
+    'Ximpulsion': 0
     'Yimpulsion': 10
     'Zimpulsion': 10
     'Energie': 1
@@ -34,17 +34,17 @@ particles = [
   }
   {
     'type': 'particles'
-    'Ximpulsion': 30
-    'Yimpulsion': 10
-    'Zimpulsion': -10
+    'Ximpulsion': 10
+    'Yimpulsion': 0
+    'Zimpulsion': 10
     'Energie': -1
     'IDProductionVertex': 1
     'IDDesintegrationVertex': 2
   }
   {
     'type': 'particles'
-    'Ximpulsion': 20
-    'Yimpulsion': 10
+    'Ximpulsion': 0
+    'Yimpulsion': 20
     'Zimpulsion': 10
     'Energie': 1
     'IDProductionVertex': 2
@@ -52,8 +52,8 @@ particles = [
   }
   {
     'type': 'particles'
-    'Ximpulsion': 30
-    'Yimpulsion': 10
+    'Ximpulsion': 20
+    'Yimpulsion': 0
     'Zimpulsion': 10
     'Energie': 1
     'IDProductionVertex': 2
@@ -61,8 +61,8 @@ particles = [
   }
   {
     'type': 'particles'
-    'Ximpulsion': 40
-    'Yimpulsion': 10
+    'Ximpulsion': 0
+    'Yimpulsion': 30
     'Zimpulsion': 10
     'Energie': 1
     'IDProductionVertex': 3
@@ -70,8 +70,8 @@ particles = [
   }
   {
     'type': 'particles'
-    'Ximpulsion': 50
-    'Yimpulsion': 10
+    'Ximpulsion': 30
+    'Yimpulsion': 0
     'Zimpulsion': 10
     'Energie': 1
     'IDProductionVertex': 4
@@ -79,13 +79,63 @@ particles = [
   }
   {
     'type': 'particles'
-    'Ximpulsion': 60
-    'Yimpulsion': 10
+    'Ximpulsion': 0
+    'Yimpulsion': 40
     'Zimpulsion': 10
     'Energie': 1
     'IDProductionVertex': 4
     'IDDesintegrationVertex': 7
   }
+]
+vertices = [
+  {
+    'id': 0
+    'Xpos':0
+    'Ypos':0
+    'Ypos':0
+  },
+  {
+    'id': 1
+    'Xpos':10
+    'Ypos':0
+    'Ypos':0
+  },
+  {
+    'id': 2
+    'Xpos':10
+    'Ypos':10
+    'Ypos':0
+  },
+  {
+    'id': 3
+    'Xpos':10
+    'Ypos':10
+    'Ypos':10
+  },
+  {
+    'id': 4
+    'Xpos':10
+    'Ypos':10
+    'Ypos':20
+  },
+  {
+    'id': 5
+    'Xpos':10
+    'Ypos':20
+    'Ypos':20
+  },
+  {
+    'id': 6
+    'Xpos':20
+    'Ypos':20
+    'Ypos':20
+  },
+  {
+    'id': 7
+    'Xpos':30
+    'Ypos':20
+    'Ypos':20
+  },
 ]
 
 
@@ -99,6 +149,19 @@ app.get '/particles/:id', (req, res) ->
   console.log 'get /particles/'+req.params.id
   particle = particles[req.params.id]
   res.json particle
+  return
+
+app.get '/verticles', (req, res) ->
+  console.log 'get /verticles/'
+  res.json particles
+  return
+
+app.get '/verticles/:id', (req, res) ->
+  console.log 'get /verticles/'+req.params.id
+  vertices.forEach (vertex)->
+    if vertex.id == req.params.id
+      res.json vertex
+    return
   return
 
 app.get '/', (req, res) ->
