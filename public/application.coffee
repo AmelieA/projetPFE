@@ -20,61 +20,74 @@ projetPFE = angular.module('projetPFE', []).controller('particleController', [
   '$scope'
   '$http'
   ($scope, $http) ->
-    canvas = undefined
+    canvasXY = undefined
     context = undefined
     get = undefined
     index = undefined
 
-    canvas = document.getElementById('canvas')
-    context = canvas.getContext('2d')
-    canvas.width = 300
-    canvas.height = 300
-    context.globalAlpha = 1.0
-    context.beginPath()
-    gridSpacing = 50
+    canvasXY = document.getElementById('canvasXY')
+    canvasYZ = document.getElementById('canvasYZ')
+    canvasZX = document.getElementById('canvasZX')
+    contextXY = canvasXY.getContext('2d')
+    contextYZ = canvasYZ.getContext('2d')
+    contextZX = canvasZX.getContext('2d')
+    canvasSize=300
     dataMagnification = 1.5
+    gridSpacing = 10*dataMagnification
 
-    drawLine = (xStrart, yStart, xEnd, yEnd) ->
+    drawLine = (context, xStrart, yStart, xEnd, yEnd) ->
       context.beginPath()
       context.moveTo xStrart, yStart
       context.lineTo xEnd, yEnd
-      context.strokeStyle = 'black'
       context.stroke()
       return
 
-    drawGrid = ->
+    drawGrid = (canvas, context)->
+      canvas.width = canvasSize
+      canvas.height = canvasSize
+      context.beginPath()
       context.strokeStyle = 'gray'
       i = 0
-      while i <= canvas.height
+      while i <= canvasSize
         context.beginPath()
         context.moveTo 0, i
-        context.lineTo canvas.width, i
+        context.lineTo canvasSize, i
         context.stroke()
         i += gridSpacing
 
       i = 0
-      while i <= canvas.width
+      while i <= canvasSize
         context.beginPath()
         context.moveTo i, 0
-        context.lineTo i, canvas.height
+        context.lineTo i, canvasSize
         context.stroke()
         i += gridSpacing
+
+      context.strokeStyle = 'red'
+      context.fillRect(canvasSize/2 - 2,canvasSize/2 - 2, 4, 4);
+      context.strokeStyle = 'black'
       return
 
     drawCurrentIndex = ->
       if $scope.particles.length == 1
-        $scope.particles[index].XimpulsionSartDrawing = canvas.width/2
-        $scope.particles[index].YimpulsionSartDrawing = canvas.height/2
-        drawGrid()
-        drawLine canvas.width/2, canvas.height/2, canvas.width/2 + $scope.particles[index].Ximpulsion*2, canvas.height/2 + $scope.particles[index].Yimpulsion*2
+        $scope.particles[index].XimpulsionSartDrawing = canvasSize/2
+        $scope.particles[index].YimpulsionSartDrawing = canvasSize/2
+        $scope.particles[index].ZimpulsionSartDrawing = canvasSize/2
+        drawGrid(canvasXY, contextXY)
+        drawGrid(canvasYZ, contextYZ)
+        drawGrid(canvasZX, contextZX)
       else
         $scope.particles.forEach (particle) ->
           if $scope.particles[index].IDProductionVertex == particle.IDDesintegrationVertex
             $scope.particles[index].XimpulsionSartDrawing = particle.Ximpulsion*dataMagnification + particle.XimpulsionSartDrawing
             $scope.particles[index].YimpulsionSartDrawing = particle.Yimpulsion*dataMagnification + particle.YimpulsionSartDrawing
-            drawLine $scope.particles[index].XimpulsionSartDrawing, $scope.particles[index].YimpulsionSartDrawing, $scope.particles[index].XimpulsionSartDrawing + $scope.particles[index].Ximpulsion*dataMagnification, $scope.particles[index].YimpulsionSartDrawing + $scope.particles[index].Yimpulsion*dataMagnification
+            $scope.particles[index].ZimpulsionSartDrawing = particle.Zimpulsion*dataMagnification + particle.ZimpulsionSartDrawing
+
           return
-      return
+      drawLine contextXY, $scope.particles[index].XimpulsionSartDrawing, $scope.particles[index].YimpulsionSartDrawing, $scope.particles[index].XimpulsionSartDrawing + $scope.particles[index].Ximpulsion*dataMagnification, $scope.particles[index].YimpulsionSartDrawing + $scope.particles[index].Yimpulsion*dataMagnification
+      drawLine contextYZ, $scope.particles[index].YimpulsionSartDrawing, $scope.particles[index].ZimpulsionSartDrawing, $scope.particles[index].YimpulsionSartDrawing + $scope.particles[index].Yimpulsion*dataMagnification, $scope.particles[index].ZimpulsionSartDrawing + $scope.particles[index].Zimpulsion*dataMagnification
+      drawLine contextZX, $scope.particles[index].ZimpulsionSartDrawing, $scope.particles[index].XimpulsionSartDrawing, $scope.particles[index].ZimpulsionSartDrawing + $scope.particles[index].Zimpulsion*dataMagnification, $scope.particles[index].XimpulsionSartDrawing + $scope.particles[index].Ximpulsion*dataMagnification
+
 
     $scope.particles = []
 
