@@ -12,6 +12,8 @@ app = express()
 #all *.server.view.html will be render using swig
 app.engine('view.html', swig.renderFile);
 app.set('view engine', 'view.html');
+#differentiate between injection fro swig ([[ ]]) and angular ({{ }})
+swig.setDefaults({ varControls: ['[[', ']]'] });
 #all views are on the ./app/views folder
 app.set('views', './public/views');
 #Static routes
@@ -23,66 +25,66 @@ app.use("/public", express.static(__dirname + '/public'));
 particles = [
   {
     'type': 'particles'
-    'Ximpulsion': '10'
-    'Yimpulsion': '10'
-    'Zimpulsion': '10'
-    'Energie': '1'
-    'ProductionVertex': '5'
-    'DesintegrationVertex': '5'
+    'Ximpulsion': 10
+    'Yimpulsion': 10
+    'Zimpulsion': 10
+    'Energie': 1
+    'IDProductionVertex': 0
+    'IDDesintegrationVertex': 1
   }
   {
     'type': 'particles'
-    'Ximpulsion': '-10'
-    'Yimpulsion': '-10'
-    'Zimpulsion': '-10'
-    'Energie': '-1'
-    'ProductionVertex': '5'
-    'DesintegrationVertex': '5'
+    'Ximpulsion': 30
+    'Yimpulsion': 10
+    'Zimpulsion': -10
+    'Energie': -1
+    'IDProductionVertex': 1
+    'IDDesintegrationVertex': 2
   }
   {
     'type': 'particles'
-    'Ximpulsion': '20'
-    'Yimpulsion': '10'
-    'Zimpulsion': '10'
-    'Energie': '1'
-    'ProductionVertex': '5'
-    'DesintegrationVertex': '5'
+    'Ximpulsion': 20
+    'Yimpulsion': 10
+    'Zimpulsion': 10
+    'Energie': 1
+    'IDProductionVertex': 2
+    'IDDesintegrationVertex': 3
   }
   {
     'type': 'particles'
-    'Ximpulsion': '30'
-    'Yimpulsion': '10'
-    'Zimpulsion': '10'
-    'Energie': '1'
-    'ProductionVertex': '5'
-    'DesintegrationVertex': '5'
+    'Ximpulsion': 30
+    'Yimpulsion': 10
+    'Zimpulsion': 10
+    'Energie': 1
+    'IDProductionVertex': 2
+    'IDDesintegrationVertex': 4
   }
   {
     'type': 'particles'
-    'Ximpulsion': '40'
-    'Yimpulsion': '10'
-    'Zimpulsion': '10'
-    'Energie': '1'
-    'ProductionVertex': '5'
-    'DesintegrationVertex': '5'
+    'Ximpulsion': 40
+    'Yimpulsion': 10
+    'Zimpulsion': 10
+    'Energie': 1
+    'IDProductionVertex': 3
+    'IDDesintegrationVertex': 5
   }
   {
     'type': 'particles'
-    'Ximpulsion': '50'
-    'Yimpulsion': '10'
-    'Zimpulsion': '10'
-    'Energie': '1'
-    'ProductionVertex': '5'
-    'DesintegrationVertex': '5'
+    'Ximpulsion': 50
+    'Yimpulsion': 10
+    'Zimpulsion': 10
+    'Energie': 1
+    'IDProductionVertex': 4
+    'IDDesintegrationVertex': 6
   }
   {
     'type': 'particles'
-    'Ximpulsion': '60'
-    'Yimpulsion': '10'
-    'Zimpulsion': '10'
-    'Energie': '1'
-    'ProductionVertex': '5'
-    'DesintegrationVertex': '5'
+    'Ximpulsion': 60
+    'Yimpulsion': 10
+    'Zimpulsion': 10
+    'Energie': 1
+    'IDProductionVertex': 4
+    'IDDesintegrationVertex': 7
   }
 ]
 
