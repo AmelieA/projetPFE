@@ -3,7 +3,8 @@
 ###
 
 express = require('express')
-swig  = require('swig');
+swig  = require('swig')
+addon = require('./build/Release/hello')
 app = express()
 
 
@@ -25,6 +26,13 @@ app.use("/public", express.static(__dirname + '/public'));
 particles = [
   {
     'type': 'particles'
+    'impulsions': [
+      {
+        'px': 0
+        'py': 10
+        'pz': 10
+      }
+    ]
     'Ximpulsion': 0
     'Yimpulsion': 10
     'Zimpulsion': 10
@@ -171,6 +179,8 @@ app.get '/', (req, res) ->
   return
 
 
+console.log( addon.hello(1,2) );
+console.log( addon.hello(2,1) );
 
 server = app.listen(8080, ->
   host = server.address().address
