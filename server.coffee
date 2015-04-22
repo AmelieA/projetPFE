@@ -4,7 +4,6 @@
 
 express = require('express')
 swig  = require('swig')
-addon = require('./build/Release/hello')
 app = express()
 
 
@@ -179,8 +178,23 @@ app.get '/', (req, res) ->
   return
 
 
-console.log( addon.hello(1,2) );
-console.log( addon.hello(2,1) );
+moduleR = require("./testC++/a.out")
+
+#compile with emcc helloTest.cc -s EXPORTED_FUNCTIONS="['_getProduct']"
+#console.log moduleR._getProduct(1)
+
+#getProduct = moduleR.cwrap('getProduct', 'string', ['number'])
+#console.log getProduct(1)
+
+#compile using embind with emcc --bind helloTest.cc
+console.log moduleR.returnString("hello")
+console.log moduleR.getProduct(1)
+console.log moduleR.getProduct(2)
+product = moduleR.getProduct(2)
+JSON.stringify(product)
+console.log product.price product.weight
+
+console.log "end of C++ test"
 
 server = app.listen(8080, ->
   host = server.address().address
