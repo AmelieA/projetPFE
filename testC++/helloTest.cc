@@ -2,7 +2,7 @@
 #include <emscripten/bind.h>
 //#include "helloTest.h"
 
-using namespace emscripten;
+
 
 struct Price{
     double euro;
@@ -14,13 +14,19 @@ struct Product {
   Price price;
 };
 
+Product setProduct(Product product, double weight, double dollar, double euro){
+    product.weight = weight;
+    product.price.dollar = dollar;
+    product.price.euro = euro;
+
+    return product;
+}
+
 Product getProduct(int id) {
 
     Product product;
     if (id==1){
-        product.weight=1;
-        product.price.euro=1.1;
-        product.price.dollar=1.2;
+        product = setProduct(product, 1, 1.1, 1.1);
         std::cout << "id = 1" << std::endl;
     }else{
         product.weight=999;
@@ -35,6 +41,8 @@ Product getProduct(int id) {
 std::string returnString(std::string string){
     return std::string(string + " hello");
 }
+
+using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(my_module) {
 

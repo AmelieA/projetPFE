@@ -190,9 +190,11 @@ moduleR = require("./testC++/a.out")
 console.log moduleR.returnString("hello")
 console.log moduleR.getProduct(1)
 console.log moduleR.getProduct(2)
-product = moduleR.getProduct(2)
+product = moduleR.getProduct(1)
 
 console.log product.price.dollar, product.weight
+json_data = JSON.stringify(product);
+console.log json_data
 
 console.log "end of C++ test"
 
