@@ -4,9 +4,14 @@
 
 using namespace emscripten;
 
+struct Price{
+    double euro;
+    double dollar;
+};
+
 struct Product {
   double weight;
-  double price;
+  Price price;
 };
 
 Product getProduct(int id) {
@@ -14,11 +19,13 @@ Product getProduct(int id) {
     Product product;
     if (id==1){
         product.weight=1;
-        product.price=1.1;
+        product.price.euro=1.1;
+        product.price.dollar=1.2;
         std::cout << "id = 1" << std::endl;
     }else{
         product.weight=999;
-        product.price=999.99;
+        product.price.euro=999.99;
+        product.price.dollar=999.88;
         std::cout << "id unknown" << std::endl;
     }
 
@@ -39,6 +46,10 @@ EMSCRIPTEN_BINDINGS(my_module) {
                 .field("weight", &Product::weight)
                 .field("price", &Product::price)
                 ;
+    value_object<Price>("Price")
+                    .field("euro", &Price::euro)
+                    .field("dollar", &Price::dollar)
+                    ;
     function("getProduct", &getProduct);
     function("returnString", &returnString);
 }

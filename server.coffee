@@ -191,8 +191,8 @@ console.log moduleR.returnString("hello")
 console.log moduleR.getProduct(1)
 console.log moduleR.getProduct(2)
 product = moduleR.getProduct(2)
-JSON.stringify(product)
-console.log product.price product.weight
+
+console.log product.price.dollar, product.weight
 
 console.log "end of C++ test"
 
