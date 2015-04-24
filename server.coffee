@@ -177,8 +177,10 @@ app.get '/', (req, res) ->
     title:'projetPFE'
   return
 
+console.time('testTime');
+console.time('loadTime');
+#moduleR = require("./testC++/a.out")
 
-moduleR = require("./testC++/a.out")
 
 #compile with emcc helloTest.cc -s EXPORTED_FUNCTIONS="['_getProduct']"
 #console.log moduleR._getProduct(1)
@@ -187,16 +189,25 @@ moduleR = require("./testC++/a.out")
 #console.log getProduct(1)
 
 #compile using embind with emcc --bind helloTest.cc
-console.log moduleR.returnString("hello")
-console.log moduleR.getProduct(1)
-console.log moduleR.getProduct(2)
-product = moduleR.getProduct(1)
+#console.log moduleR.returnString("hello")
+#console.log moduleR.getProduct(1)
+#console.log moduleR.getProduct(2)
+#product = moduleR.getProduct(1)
+#
+#console.log product.price.dollar, product.weight
+#json_data = JSON.stringify(product);
+#console.log json_data
+#
 
-console.log product.price.dollar, product.weight
-json_data = JSON.stringify(product);
-console.log json_data
+#-----------Time test----------------
+#moduleR = require("./build/Release/hello")
+#factorial = moduleR.factorial(30)
+moduleR = require("./testC++/a.out")
+console.timeEnd('loadTime');
+factorial = moduleR.factorial(30)
+console.log factorial
+console.timeEnd('testTime');
 
-console.log "end of C++ test"
 
 server = app.listen(8080, ->
   host = server.address().address

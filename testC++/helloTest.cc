@@ -42,6 +42,15 @@ std::string returnString(std::string string){
     return std::string(string + " hello");
 }
 
+int factorial(int n)
+{
+    if (n<=1)
+        return(1);
+    else
+        n=n*factorial(n-1);
+    return(n);
+}
+
 using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(my_module) {
@@ -60,4 +69,5 @@ EMSCRIPTEN_BINDINGS(my_module) {
                     ;
     function("getProduct", &getProduct);
     function("returnString", &returnString);
+    function("factorial", &factorial);
 }
