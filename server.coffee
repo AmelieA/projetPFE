@@ -181,7 +181,8 @@ app.get '/', (req, res) ->
 
 #source /home/amelie/Desktop/root/bin/thisroot.sh
 #source /home/amelie/workspace/albers-core-module/deps/init_linux.sh
-#console.log(addon.returnValue(4))
+console.log(addon.getProduct(1))
+console.log(addon.getProduct(4))
 
 server = app.listen(8080, ->
   host = server.address().address
